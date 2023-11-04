@@ -16,7 +16,7 @@ from rembg import remove
 
 from io import BytesIO
 
-from segment_anything import sam_model_registry, SamAutomaticMaskGenerator, SamPredictor
+
 warnings.filterwarnings('ignore')
 
 st.set_page_config(
