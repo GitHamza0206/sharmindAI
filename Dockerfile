@@ -1,19 +1,20 @@
-FROM python:3.7
+# Use the official Python base image
+FROM python:3.9-slim
 
-RUN pip install virtualenv
-ENV VIRTUAL_ENV=/venv
-RUN virtualenv venv -p python3
-ENV PATH="VIRTUAL_ENV/bin:$PATH"
-
+# Set the working directory in the container
 WORKDIR /app
-ADD . /app
 
-# Install dependencies
-RUN pip install -r requirements.txt
-RUN apt-get update
+# Copy the dependencies file to the working directory
+COPY requirements.txt .
 
-# Expose port 
-ENV PORT 8501
+# Install any dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Run the application:
-CMD ["streamlit","run","app.py"]
+# Copy the content of the local src directory to the working directory
+COPY . .
+
+# Streamlit runs on port 8501 by default, expose it
+EXPOSE 8501
+
+# Command to run on container start
+CMD ["streamlit", "run", "image_segmentation.py"]
