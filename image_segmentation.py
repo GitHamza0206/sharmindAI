@@ -103,7 +103,7 @@ def show_masks_on_image(raw_image, masks):
     del mask
     gc.collect()
      
-@st.cache_data()
+@st.cache_resource()
 def process_image(image):
     
     pil_image = Image.fromarray(image)
